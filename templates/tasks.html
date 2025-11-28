@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tasks - {{ appMain }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <head>
+        <title>All Tasks</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+<body>
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>✓</span>
+                <h1>{{ appMain }}</h1>
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="/"><span>🏠</span> Home</a></li>
+                    <li><a href="/tasks" class="active"><span>📋</span> All Tasks</a></li>
+                    <li><a href="/add"><span>➕</span> Add Task</a></li>
+                    <li><a href="/update"><span>✏️</span> Update Task</a></li>
+                    <li><a href="/delete"><span>🗑️</span> Delete Task</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- Removed inline styles and used CSS classes -->
+            <div class="tasks-header">
+                <div>
+                    <h2>All Tasks</h2>
+                    <p class="header-subtitle">Manage and track all your tasks</p>
+                </div>
+                <a href="/add" class="btn btn-primary">➕ New Task</a>
+            </div>
+
+            {% if tasks %}
+            <div class="grid grid-3">
+                {% for task in tasks %}
+                <div class="task-card">
+                    <div class="task-header">
+                        <span class="task-id">#{{ task.task_id }}</span>
+                        <span class="task-emoji">
+                            {% if task.status == 'Completed' %}
+                            ✅
+                            {% else %}
+                            ⏳
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <h3 class="task-title">{{ task.title }}</h3>
+                    <p class="task-desc">{{ task.description }}</p>
+
+                    <div class="task-meta">
+                        <span
+                            class="badge {% if task.status == 'Completed' %}badge-completed{% else %}badge-pending{% endif %}">
+                            {% if task.status == 'Completed' %}
+                            ✓
+                            {% else %}
+                            ⏱️
+                            {% endif %}
+                            {{ task.status }}
+                        </span>
+
+                        <div class="task-actions">
+                            <a href="/update" class="btn btn-warning btn-sm">✏️ Edit</a>
+                            <a href="/delete" class="btn btn-danger btn-sm">🗑️ Delete</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="empty-state card">
+                <span class="empty-icon">📭</span>
+                <h2>No Tasks Yet</h2>
+                <p>You haven't created any tasks. Start by creating your first task!</p>
+                <a href="/add" class="btn btn-primary btn-lg">Create Your First Task</a>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+
+</html>

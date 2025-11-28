@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Task - {{ appMain }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+ 
+</head>
+<body>
+  <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span>✓</span>
+        <h1>{{ appMain }}</h1>
+      </div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="/"><span>🏠</span> Home</a></li>
+          <li><a href="/tasks"><span>📋</span> All Tasks</a></li>
+          <li><a href="/add" class="active"><span>➕</span> Add Task</a></li>
+          <li><a href="/update"><span>✏️</span> Update Task</a></li>
+          <li><a href="/delete"><span>🗑️</span> Delete Task</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div class="form-container">
+        <div class="card">
+          <!-- Removed inline styles from card-header -->
+          <div class="card-header">
+            <div>
+              <h2>Create New Task</h2>
+              <p class="card-subtitle">Add a new task to your to-do list</p>
+            </div>
+            <span class="card-icon">➕</span>
+          </div>
+
+          <form method="POST" action="/add" class="card-body">
+            <div class="form-group">
+              <label for="title">Task Title *</label>
+              <input 
+                type="text" 
+                id="title" 
+                name="title" 
+                placeholder="Enter task title (e.g., Complete project report)"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="description">Task Description *</label>
+              <textarea 
+                id="description" 
+                name="description" 
+                placeholder="Describe your task in detail. What needs to be done? Any important notes?"
+                required
+              ></textarea>
+            </div>
+
+            <div class="card-footer">
+              <a href="/tasks" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary btn-lg">Create Task</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Moved inline styles to CSS class -->
+        <!-- INFO SECTION -->
+        <div class="info-box info-box-primary">
+          <h3>💡 Pro Tips</h3>
+          <ul>
+            <li>Use clear and concise task titles</li>
+            <li>Add detailed descriptions for better context</li>
+            <li>Tasks start with "Pending" status</li>
+            <li>You can update or delete tasks anytime</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

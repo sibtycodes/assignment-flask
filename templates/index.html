@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ appMain }} - Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span>✓</span>
+        <h1>{{ appMain }}</h1>
+      </div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="/" class="active"><span>🏠</span> Home</a></li>
+          <li><a href="/tasks"><span>📋</span> All Tasks</a></li>
+          <li><a href="/add"><span>➕</span> Add Task</a></li>
+          <li><a href="/update"><span>✏️</span> Update Task</a></li>
+          <li><a href="/delete"><span>🗑️</span> Delete Task</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- HERO SECTION -->
+      <section class="hero">
+        <h1 class="gradient-text">Welcome to {{ appMain }}</h1>
+        <p>Stay organized, boost productivity, and manage your tasks effortlessly with our modern task management system.</p>
+        <div class="hero-buttons">
+          <a href="/tasks" class="btn btn-primary btn-lg">View All Tasks</a>
+          <a href="/add" class="btn btn-secondary btn-lg">Create New Task</a>
+        </div>
+      </section>
+
+      <!-- Made stats dynamic by passing data from Flask -->
+      <!-- STATS SECTION -->
+      <section class="stats-container">
+        <div class="stat-card">
+          <div class="stat-number">{{ total_tasks }}</div>
+          <div class="stat-label">Total Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ completed_tasks }}</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ pending_tasks }}</div>
+          <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">{{ progress_percentage }}%</div>
+          <div class="stat-label">Progress</div>
+        </div>
+      </section>
+
+      <!-- FEATURES SECTION -->
+      <section>
+        <h2>Why Choose {{ appMain }}?</h2>
+        <div class="features">
+          <div class="feature-card">
+            <span class="feature-icon">⚡</span>
+            <h3>Lightning Fast</h3>
+            <p>Create, update, and manage your tasks in seconds with our intuitive interface.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🎯</span>
+            <h3>Stay Focused</h3>
+            <p>Organize tasks with clear status indicators to keep track of your progress.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">📊</span>
+            <h3>Track Progress</h3>
+            <p>Monitor your productivity with real-time task statistics and insights.</p>
+          </div>
+          <div class="feature-card">
+            <span class="feature-icon">🔒</span>
+            <h3>Always Secure</h3>
+            <p>Your tasks are safely stored and easily accessible from anywhere.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

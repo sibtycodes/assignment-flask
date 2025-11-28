@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Task - {{ appMain }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span>✓</span>
+        <h1>{{ appMain }}</h1>
+      </div>
+      <nav>
+        <ul class="sidebar-nav">
+          <li><a href="/"><span>🏠</span> Home</a></li>
+          <li><a href="/tasks"><span>📋</span> All Tasks</a></li>
+          <li><a href="/add"><span>➕</span> Add Task</a></li>
+          <li><a href="/update" class="active"><span>✏️</span> Update Task</a></li>
+          <li><a href="/delete"><span>🗑️</span> Delete Task</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <div class="form-container">
+        <!-- Compact tasks list above the update form -->
+        {% if tasks %}
+        <div class="compact-tasks-card" style="margin-bottom: 30px;">
+          <h3 class="compact-title">Current Tasks</h3>
+          <table class="compact-tasks-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for t in tasks %}
+              <tr>
+                <td>{{ t.task_id }}</td>
+                <td>{{ t.title }}</td>
+                <td>
+                  {% if t.status == 'Completed' %}
+                    <span class="badge badge-completed">✅</span>
+                  {% else %}
+                    <span class="badge badge-pending">⏳</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+
+        <!-- Removed inline styles from message -->
+        {% if message %}
+          <div class="message message-success fade-in">
+            <span class="message-icon">✓</span>
+            <p>{{ message }}</p>
+          </div>
+        {% endif %}
+
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h2>Update Task</h2>
+              <p class="card-subtitle">Modify task description or mark as completed</p>
+            </div>
+            <span class="card-icon">✏️</span>
+          </div>
+
+          <form method="POST" action="/update" class="card-body">
+            <div class="form-group">
+              <label for="task_id">Task ID *</label>
+              <input 
+                type="number" 
+                id="task_id" 
+                name="task_id" 
+                placeholder="Enter the ID of the task to update"
+                required
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="description">New Description</label>
+              <textarea 
+                id="description" 
+                name="description" 
+                placeholder="Update your task description here (optional)"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <div class="checkbox-group">
+                <input 
+                  type="checkbox" 
+                  id="completed" 
+                  name="completed" 
+                  value="true"
+                >
+                <label for="completed" class="checkbox-label">Mark as Completed</label>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <a href="/tasks" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary btn-lg">Update Task</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Moved inline styles to info-box-secondary CSS class -->
+        <!-- INFO SECTION -->
+        <div class="info-box info-box-secondary">
+          <h3>ℹ️ Instructions</h3>
+          <ul>
+            <li>Enter the task ID to identify which task to update</li>
+            <li>You can update the description, mark as completed, or both</li>
+            <li>Leave the description empty to keep the original text</li>
+            <li>Completed tasks will show a ✅ badge in the task list</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

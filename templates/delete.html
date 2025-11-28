@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Task - {{ appMain }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span>✓</span>
+                <h1>{{ appMain }}</h1>
+            </div>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="/"><span>🏠</span> Home</a></li>
+                    <li><a href="/tasks"><span>📋</span> All Tasks</a></li>
+                    <li><a href="/add"><span>➕</span> Add Task</a></li>
+                    <li><a href="/update"><span>✏️</span> Update Task</a></li>
+                    <li><a href="/delete" class="active"><span>🗑️</span> Delete Task</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <div class="form-container">
+                <!-- Removed inline styles from message -->
+                {% if message %}
+                    <div class="message message-success fade-in">
+                        <span class="message-icon">✓</span>
+                        <p>{{ message }}</p>
+                    </div>
+                {% endif %}
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2>Delete Task</h2>
+                            <p class="card-subtitle">Permanently remove a task from your list</p>
+                        </div>
+                        <span class="card-icon">🗑️</span>
+                    </div>
+
+                    <!-- Moved inline styles to warning-box CSS class -->
+                    <!-- WARNING BOX -->
+                    <div class="warning-box">
+                        <p class="warning-title">
+                            <span class="warning-icon">⚠️</span> Warning: This action cannot be undone
+                        </p>
+                        <p class="warning-text">
+                            Deleting a task will permanently remove it from your system. Please make sure you have the correct task ID before proceeding.
+                        </p>
+                    </div>
+
+                    <form method="POST" action="/delete" class="card-body">
+                        <div class="form-group">
+                            <label for="task_id">Task ID *</label>
+                            <input 
+                                type="number" 
+                                id="task_id" 
+                                name="task_id" 
+                                placeholder="Enter the ID of the task to delete"
+                                required
+                            >
+                        </div>
+
+                        <div class="card-footer">
+                            <a href="/tasks" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-danger btn-lg" onclick="return confirm('Are you absolutely sure? This task will be permanently deleted and cannot be recovered.')">
+                                <span>🗑️</span> Delete Task
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Moved inline styles to info-box-danger CSS class -->
+                <!-- INFO SECTION -->
+                <div class="info-box info-box-danger">
+                    <h3>⚡ How to Delete</h3>
+                    <ul>
+                        <li>Find the task ID from your task list</li>
+                        <li>Enter the ID in the input field above</li>
+                        <li>Click "Delete Task" to remove it permanently</li>
+                        <li>A confirmation dialog will appear before deletion</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
