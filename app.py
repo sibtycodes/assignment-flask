@@ -1,4 +1,5 @@
 
+
 from flask import Flask, render_template, request, redirect
 import json
 import os
@@ -11,14 +12,9 @@ from backend.task_handler import (
     update_task_description,
     delete_task
 )
-
-
-
 load_dotenv()
 app = Flask(__name__)
 appMain = os.environ.get('appMain')
-
-# ---------------- HOME PAGE ----------------
 @app.route("/")
 def home():
     tasks = load_tasks()
@@ -26,7 +22,6 @@ def home():
     completed_tasks = sum(1 for task in tasks if task["status"] == "Completed")
     pending_tasks = total_tasks - completed_tasks
     progress_percentage = int((completed_tasks / total_tasks * 100)) if total_tasks > 0 else 0
-    
     return render_template(
         "index.html",
         total_tasks=total_tasks,
@@ -35,9 +30,6 @@ def home():
         progress_percentage=progress_percentage,
         appMain=appMain
     )
-
-
-# ---------------- ADD TASK ----------------
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
@@ -46,45 +38,30 @@ def add():
         add_task(title, desc)
         return redirect("/tasks")
     return render_template("add.html", appMain=appMain)
-
-
-# ---------------- VIEW TASKS ----------------
 @app.route("/tasks")
 def tasks():
     tasks = load_tasks()
     return render_template("tasks.html", tasks=tasks, appMain=appMain)
-
-
-# ---------------- UPDATE TASK ----------------
 @app.route("/update", methods=["GET", "POST"])
 def update():
     if request.method == "POST":
         task_id = int(request.form["task_id"])
         new_desc = request.form.get("description")
         completed = request.form.get("completed")
-
         msg = ""
         if new_desc:
             msg = update_task_description(task_id, new_desc)
         if completed:
             msg = update_task_status(task_id)
-
         return render_template("update.html", message=msg, appMain=appMain)
-
     return render_template("update.html",tasks=load_tasks(), appMain=appMain)
-
-
-# ---------------- DELETE TASK ----------------
 @app.route("/delete", methods=["GET", "POST"])
 def delete():
     if request.method == "POST":
         task_id = int(request.form["task_id"])
         msg = delete_task(task_id)
         return render_template("delete.html", message=msg, appMain=appMain)
-
     return render_template("delete.html", appMain=appMain)
-
-
 if __name__ == "__main__":
     host = os.environ.get('FLASK_RUN_HOST', '0.0.0.0')
     port = int(os.environ.get('FLASK_RUN_PORT', 5000))

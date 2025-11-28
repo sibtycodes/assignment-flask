@@ -8,7 +8,6 @@
 </head>
 <body>
   <div class="container">
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-brand">
         <span>✓</span>
@@ -25,10 +24,8 @@
       </nav>
     </aside>
 
-    <!-- MAIN CONTENT -->
     <main class="main-content">
       <div class="form-container">
-        <!-- Compact tasks list above the update form -->
         {% if tasks %}
         <div class="compact-tasks-card" style="margin-bottom: 30px;">
           <h3 class="compact-title">Current Tasks</h3>
@@ -59,7 +56,6 @@
         </div>
         {% endif %}
 
-        <!-- Removed inline styles from message -->
         {% if message %}
           <div class="message message-success fade-in">
             <span class="message-icon">✓</span>
@@ -116,7 +112,6 @@
           </form>
         </div>
 
-        <!-- Moved inline styles to info-box-secondary CSS class -->
         <!-- INFO SECTION -->
         <div class="info-box info-box-secondary">
           <h3>ℹ️ Instructions</h3>

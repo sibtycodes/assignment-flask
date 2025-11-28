@@ -9,7 +9,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="sidebar-brand">
                 <span>✓</span>
@@ -26,10 +25,8 @@
             </nav>
         </aside>
 
-        <!-- MAIN CONTENT -->
         <main class="main-content">
             <div class="form-container">
-                <!-- Removed inline styles from message -->
                 {% if message %}
                     <div class="message message-success fade-in">
                         <span class="message-icon">✓</span>
@@ -46,8 +43,6 @@
                         <span class="card-icon">🗑️</span>
                     </div>
 
-                    <!-- Moved inline styles to warning-box CSS class -->
-                    <!-- WARNING BOX -->
                     <div class="warning-box">
                         <p class="warning-title">
                             <span class="warning-icon">⚠️</span> Warning: This action cannot be undone
@@ -78,8 +73,6 @@
                     </form>
                 </div>
 
-                <!-- Moved inline styles to info-box-danger CSS class -->
-                <!-- INFO SECTION -->
                 <div class="info-box info-box-danger">
                     <h3>⚡ How to Delete</h3>
                     <ul>
