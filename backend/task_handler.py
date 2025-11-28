@@ -3,7 +3,7 @@ import os
 
 FILE = "tasks.json"
 
-# ------------ LOAD TASKS ------------
+
 def load_tasks():
     try:
         if not os.path.exists(FILE):
@@ -17,13 +17,13 @@ def load_tasks():
         return []
 
 
-# ------------ SAVE TASKS ------------
+
 def save_tasks(tasks):
     with open(FILE, "w") as f:
         json.dump(tasks, f, indent=4)
 
 
-# ------------ ADD NEW TASK ------------
+
 def add_task(title, description):
     tasks = load_tasks()
     task_id = len(tasks) + 1
@@ -39,7 +39,7 @@ def add_task(title, description):
     save_tasks(tasks)
 
 
-# ------------ UPDATE TASK DESCRIPTION ------------
+
 def update_task_description(task_id, new_desc):
     tasks = load_tasks()
     for task in tasks:
@@ -49,8 +49,7 @@ def update_task_description(task_id, new_desc):
             return "Description updated successfully"
     return "Task not found"
 
-
-# ------------ MARK TASK COMPLETED ------------
+ 
 def update_task_status(task_id):
     tasks = load_tasks()
     for task in tasks:
@@ -61,7 +60,7 @@ def update_task_status(task_id):
     return "Task not found"
 
 
-# ------------ DELETE TASK ------------
+ 
 def delete_task(task_id):
     tasks = load_tasks()
     for task in tasks:
